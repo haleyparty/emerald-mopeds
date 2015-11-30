@@ -53,7 +53,6 @@ Lancealot.JobRowView = Backbone.View.extend({
     e && e.preventDefault();
     var thisRow = this.$el[0];
 
-    var clientId = $(thisRow).find('#jobClientName').text();
     var description = $(thisRow).find('#jobDescription').text();
     var jobStatus = $(thisRow).find('#jobStatus').val();
     var dueDate = $(thisRow).find('#jobDueDate').text();
@@ -63,7 +62,6 @@ Lancealot.JobRowView = Backbone.View.extend({
     dueDate = dueDate[2] + '-' + dateNumbers[dueDate[0]] + '-' + dueDate[1];
 
     this.model.set({
-      client_id: clientId,
       job_name: description,
       job_status: jobStatus,
       due_date: dueDate
