@@ -32,12 +32,12 @@ Lancealot.JobsListView = Backbone.View.extend({
     return this;
   },
 
-  addOne: function(item){
+  addOne: function(item) {
     var view = new Lancealot.JobRowView({ model: item });
     this.$el.append(view.render().el);
   },
 
-  addAll: function(){
+  addAll: function() {
     this.collection.forEach(this.addOne, this);
   },
 
@@ -51,7 +51,7 @@ Lancealot.JobsListView = Backbone.View.extend({
     if (e.target.value === 'all') this.render();
     else {
       var list = this.collection.filter(function(model) {
-        return model.get('status') === e.target.value
+        return model.get('status') === e.target.value;
       });
       this.filteredRender(list);
     }
