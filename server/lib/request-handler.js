@@ -192,7 +192,10 @@ Finds all clients in the database and responds with result of query
 */
 
 exports.fetchClients = function (req, res) {
-  Client.where({user_id: req.session.user.id, isActive: true}).fetchAll()
+  Client.where({
+    user_id: req.session.user.id,
+    isActive: true
+  }).fetchAll()
   .then(function (clients) {
     res.send(clients);
   });
@@ -203,6 +206,7 @@ exports.fetchClients = function (req, res) {
 // */
 
 exports.addJob = function (req, res) {
+  console.log(req.body.due_date)
   new Job({
     user_id: req.session.user.id,
     client_id: req.body.client_id,
@@ -219,6 +223,7 @@ exports.addJob = function (req, res) {
 };
 
 exports.updateJob = function (req, res) {
+  console.log(req.body.due_date)
   var id = +req.params.id;
   Client.where({
     id: req.body.client_id
@@ -232,7 +237,7 @@ exports.updateJob = function (req, res) {
         // client_id: clientId,
         job_name: req.body.job_name,
         job_status: req.body.job_status,
-        // due_date: req.body.due_date
+        due_date: req.body.due_date
       });
       model.save();
       res.status(204).send('Job updated');
