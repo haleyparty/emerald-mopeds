@@ -13,11 +13,10 @@ Lancealot.JobRowView = Backbone.View.extend({
   className: 'clickable-row',
 
   events: {
-    'click': function() {
-      this.model.navigateToView();
-    },
     'click input:checkbox': 'toggleComplete',
-    'click .deleteJob': 'deleteJob'
+    'click .deleteJob': 'deleteJob',
+    'click .updateJob': 'updateJob',
+    'click .goToTasks': 'goToTasks'
   },
 
   template: Templates['jobRow'],
@@ -57,6 +56,36 @@ Lancealot.JobRowView = Backbone.View.extend({
   deleteJob: function(e) {
     e && e.preventDefault();
     this.model.destroy();
+  },
+
+  updateJob: function(e) {
+    e && e.preventDefault();
+    var thisRow = this.$el[0];
+
+    var clientId = $(thisRow).find('#jobClientName').text();
+    var description = $(thisRow).find('#jobDescription').text();
+    var jobStatus = $(thisRow).find('#jobStatus').text();
+    var dueDate = new Date($(thisRow).find('#jobDueDate').text());
+
+    this.model.set({
+      client_id: clientId,
+      job_name: description,
+      job_status: jobStatus/*,
+      due_date: dueDate*/
+    });
+    this.model.save(null, {
+      success: function() {
+        $('<div>Changes changed successfully!</div>').insertBefore('table')
+          .delay(1500)
+          .fadeOut(function() {
+            $(this).remove(); 
+          });
+      }
+    });
+  },
+
+  goToTasks: function() {
+    Backbone.history.navigate('/job/' + this.model.get('id'), true);
   }
 
 });

@@ -220,18 +220,23 @@ exports.addJob = function (req, res) {
 
 exports.updateJob = function (req, res) {
   var id = +req.params.id;
-  Job.where({
-    user_id: req.session.user.id,
-    id: id
-  }).fetch().then(function (model) {
-    model.set({
-      client_id: req.body.client_id, //will need to retrieve client id based on client selected
-      job_name: req.body.job_name,
-      job_status: req.body.job_status,
-      due_date: req.body.due_date
+  Client.where({
+    id: req.body.client_id
+  }).fetch().then(function (clientId) {
+    clientId = clientId;
+    Job.where({
+      user_id: req.session.user.id,
+      id: id
+    }).fetch().then(function (model) {
+      model.set({
+        // client_id: clientId,
+        job_name: req.body.job_name,
+        job_status: req.body.job_status/*,
+        due_date: req.body.due_date*/
+      });
+      model.save();
+      res.status(204).send('Job updated');
     });
-    model.save();
-    res.status(204).send('Job updated');
   });
 };
 

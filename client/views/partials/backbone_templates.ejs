@@ -33,14 +33,18 @@
         </select>
       </th>
       <th></th>
+      <th></th>
+      <th></th>
     </thead>
 </script>
 
 <script id='jobRow' type='text/x-handlebars-template'>
-    <td>{{clientName}}</td>
-    <td>{{description}}</td>
-    <td>{{dueDate}}</td>
-    <td>{{status}}</td>
+    <td id='jobClientName' contenteditable>{{clientName}}</td>
+    <td id='jobDescription' contenteditable>{{description}}</td>
+    <td id='jobDueDate' contenteditable>{{dueDate}}</td>
+    <td id='jobStatus' contenteditable>{{status}}</td>
+    <td><button class='goToTasks'>Tasks</button></td>
+    <td><button class='updateJob'>Update</button></td>
     <td><button class='deleteJob'>Delete</button></td>
 </script>
 
