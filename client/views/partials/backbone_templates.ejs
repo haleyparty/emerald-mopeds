@@ -39,10 +39,17 @@
 </script>
 
 <script id='jobRow' type='text/x-handlebars-template'>
-    <td id='jobClientName' contenteditable>{{clientName}}</td>
+    <td id='jobClientName'>{{clientName}}</td>
     <td id='jobDescription' contenteditable>{{description}}</td>
     <td id='jobDueDate' contenteditable>{{dueDate}}</td>
-    <td id='jobStatus' contenteditable>{{status}}</td>
+    <td>
+      <select class='btn-link' id='jobStatus'>
+        <option value="{{status}}">{{status}}</option>
+        <option value='Not Started'>Not Started</option>
+        <option value='In Progress'>In Progress</option>
+        <option value='Completed'>Completed</option>
+      </select>
+    </td>
     <td><button class='goToTasks'>Tasks</button></td>
     <td><button class='updateJob'>Update</button></td>
     <td><button class='deleteJob'>Delete</button></td>

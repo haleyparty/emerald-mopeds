@@ -231,8 +231,8 @@ exports.updateJob = function (req, res) {
       model.set({
         // client_id: clientId,
         job_name: req.body.job_name,
-        job_status: req.body.job_status/*,
-        due_date: req.body.due_date*/
+        job_status: req.body.job_status,
+        // due_date: req.body.due_date
       });
       model.save();
       res.status(204).send('Job updated');
