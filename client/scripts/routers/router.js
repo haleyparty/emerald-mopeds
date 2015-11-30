@@ -20,7 +20,7 @@ Lancealot.Router = Backbone.Router.extend({
     'addemployee': 'addEmployee',
     'employees': 'showEmployees',
     'preferences': 'showPreferences',
-    'job/:id': 'showTasks',
+    'job?id=:id': 'showTasks',
     '': 'showJobs'
   },
 
