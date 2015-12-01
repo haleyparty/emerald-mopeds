@@ -233,8 +233,9 @@ exports.updateJob = function (req, res) {
       job_status: req.body.job_status,
       due_date: req.body.due_date
     });
-    model.save();
-    res.status(204).send('Job updated');
+    model.save().then(function (savedJob) {
+      res.status(204).send('Job updated!');
+    });
   });
 };
 
@@ -419,7 +420,7 @@ exports.updateEmployee = function (req, res) {
     });
     model.save().then(function (savedCLient) {
       res.status(204).send('Entry updated');
-    })
+    });
   });
 };
 
@@ -436,7 +437,12 @@ exports.addExpenseToTask = function (req, res) {
   .then(function (newExpense) {
     new Job_Task({
       id: job_task_id,
-    }).expenses().attach({expense_id: newExpense.id, quantity: 1, created_at: new Date(), updated_at: new Date()})
+    }).expenses().attach({
+      expense_id: newExpense.id,
+      quantity: 1, 
+      created_at: new Date(), 
+      updated_at: new Date()
+    })
     .then(function () {
       res.send()
     });
