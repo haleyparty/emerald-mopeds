@@ -78,7 +78,7 @@ Lancealot.JobRowView = Backbone.View.extend({
   },
 
   goToTasks: function() {
-    Backbone.history.navigate('/job/' + this.model.get('id'), true);
+    Backbone.history.navigate('/job?id=' + this.model.get('id'), true);
   }
 
 });

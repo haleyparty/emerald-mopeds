@@ -16,7 +16,7 @@ Lancealot.TasksPageView = Backbone.View.extend({
 
   events: {
     'keyup input': 'handleSearch',
-    'click button.addTask': 'addTaskToJob'
+    'click button#createNewTask': 'addTaskToJob'
   },
 
   initialize: function (options) {

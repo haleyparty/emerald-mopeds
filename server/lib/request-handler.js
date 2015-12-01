@@ -469,8 +469,8 @@ exports.addTaskToJob = function (req, res) {
       task_id: newTask.id,
       status: 'Not Started'
     }).save()
-    .then(function () {
-      res.send()
+    .then(function (newTask) {
+      res.send(newTask)
     });
   }, function (err) {
     console.log(err);
