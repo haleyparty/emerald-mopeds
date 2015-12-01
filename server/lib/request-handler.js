@@ -152,12 +152,14 @@ exports.fetchJobs = function (req, res) {
     clients.serialize().forEach(function (client) {
       var clientName = client.name;
       client.jobs.forEach(function (job) {
-        jobsArray.push({description: job.job_name,
-          dueDate: job.due_date,
-          clientName: clientName,
-          status: job.job_status,
-          id: job.id
-        });
+        if (job.isActive) {
+          jobsArray.push({description: job.job_name,
+            dueDate: job.due_date,
+            clientName: clientName,
+            status: job.job_status,
+            id: job.id
+          });
+        }
       });
     });
     res.send(jobsArray);
@@ -176,7 +178,6 @@ exports.fetchJob = function (req, res) {
         returnObj.forEach(function (item) {
           item.potentialEmployees = potentialEmployees.serialize();
         });
-        console.log(returnObj)
         res.send(returnObj);
       })
     } else {
@@ -206,7 +207,6 @@ exports.fetchClients = function (req, res) {
 // */
 
 exports.addJob = function (req, res) {
-  console.log(req.body.due_date)
   new Job({
     user_id: req.session.user.id,
     client_id: req.body.client_id,
@@ -244,7 +244,6 @@ exports.deleteJob = function (req, res) {
     user_id: req.session.user.id,
     id: id
   }).fetch().then(function (model) {
-    console.log(model);
     model.set({
       isActive: false
     });
