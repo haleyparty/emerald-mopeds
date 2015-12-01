@@ -44,10 +44,9 @@
     <td id='jobDueDate' contenteditable>{{dueDate}}</td>
     <td>
       <select class='btn-link' id='jobStatus'>
-        <option value="{{status}}">{{status}}</option>
-        <option value='Not Started'>Not Started</option>
-        <option value='In Progress'>In Progress</option>
-        <option value='Completed'>Completed</option>
+        <option value='Not Started' id='notStarted' {{#if notStarted}}selected="selected"{{/if}}>Not Started</option>
+        <option value='In Progress' id='inProgress' {{#if inProgress}}selected="selected"{{/if}}>In Progress</option>
+        <option value='Completed' id='completed' {{#if completed}}selected="selected"{{/if}}>Completed</option>
       </select>
     </td>
     <td><button class='goToTasks'>Tasks</button></td>
